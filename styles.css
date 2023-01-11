@@ -346,7 +346,7 @@ input {
 
 
 
-@media only screen and (max-width: 389px) {
+@media (max-width: 767px) {
   /* styles here will be applied to devices with screen widths of 768 pixels or less */
 
   h1 {
