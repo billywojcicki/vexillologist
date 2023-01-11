@@ -366,4 +366,8 @@ input {
     display: none;
   }
 
+  .answer-text {
+    margin-left: 8px;
+  }
+
 }
