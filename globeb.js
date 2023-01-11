@@ -56,7 +56,7 @@ function autocenter(options) {
   var needsCentering = false;
   var globe = null;
 
-  if (window.devicePixelRatio == 2) {
+  if (window.devicePixelRatio >= 2) {
     globe.canvas.width = width * 2;
     globe.canvas.height = height * 2;
     context = canvas.getContext('2d');
@@ -99,7 +99,12 @@ function autoscale(options) {
     planet.onInit(function () {
       var width = window.innerWidth;
       var height = window.innerHeight;
-      planet.projection.scale(Math.min(width, height) / 1.25);
+      if (width >= 787) {
+        planet.projection.scale(Math.min(width, height) / 1.2);
+      } else {
+        planet.projection.scale(Math.min(width, height) / 0.9);
+      }
+
     });
   };
 };
