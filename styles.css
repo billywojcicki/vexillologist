@@ -24,6 +24,8 @@ html {
                                     supported by Chrome, Edge, Opera and Firefox */
 }
 
+/* LOOKING PRETTY PEARLED! We should scale down settings menu size too. */
+
 canvas {
   position: absolute;
   z-index: 0;
@@ -44,18 +46,17 @@ canvas:active {
 
 body {
   color: white;
-  font-size: 16px;
-  margin-bottom: 0;
+  margin: 0;
   font-family: 'Nunito', sans-serif;
-  background-image: url('space.png');
+  background-image: url('/space.png');
   background-size: auto;
-  height: 100%;
   background-repeat: repeat;
   overflow: hidden;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   text-align: center;
   /* white-space: normal; */
   z-index: 1;
@@ -76,23 +77,21 @@ img,
 /* packing h1 and h2 into #logo because we don't want "justify-content: space-evenly;" to separate them */
 #logo {
   color: white;
-  width: 100%;
 }
 
 h1 {
-  font-size: 48px;
   font-family: Feather;
   color: white;
   text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
   margin: 0 0 12px 0;
-  /* font-size: 4.5em; */
+  font-size: 72px;
 }
 
 h2 {
   color: white;
   text-shadow: 1px 2px 1.5px rgba(0, 0, 0, 0.3);
   margin: 12px 0 0 0;
-  font-size: 20px;
+  font-size: 24px;
 }
 
 #answers-container {
@@ -101,7 +100,6 @@ h2 {
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(5, auto);
   column-gap: 16px;
-  margin: 0 16px;
 }
 
 /* !!! */
@@ -142,12 +140,8 @@ input::placeholder {
   transition: all 0.1s;
   display: inline-flex;
   align-items: center;
-  max-width: 232px;
-  width: 100%;
-  min-width: 144px;
-  max-height: 56px;
-  height: auto;
-  /* min-height: 36px; */
+  width: 232px;
+  height: 56px;
   margin: 8px 0;
 }
 
@@ -183,11 +177,11 @@ input::placeholder {
 #score-container {
   text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2);
   font-weight: bold;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 #score {
-  line-height: 2.125em;
+  line-height: 34px;
   margin: 16px 0;
 }
 
@@ -210,7 +204,7 @@ input::placeholder {
 }
 
 .settings-text {
-  font-size: 0.8em;
+  font-size: 16px;
   font-weight: 100;
   width: 100%;
 }
@@ -341,27 +335,27 @@ input:checked+.slider:before {
 }
 
 img {
-  width: 256px;
-  height: 192px;
   margin: 24px 0;
 }
 
 input {
   width: 348px;
   height: 56px;
-  font-size: 1.25em;
+  font-size: 20px;
 }
 
 @media only screen and (max-width: 768px) {
   /* styles here will be applied to devices with screen widths of 768 pixels or less */
 
-h1 {
-  font-size: 28px;
-}
+  h1 {
+    font-size: 28px;
+    margin-bottom: 4px;
+  }
 
-h2 {
-  font-size: 14px;
-}
+  h2 {
+    font-size: 11px;
+    margin-top: 4px;
+  }
 
   img {
     margin: 12px 0;
@@ -396,19 +390,20 @@ h2 {
     height: 72px;
   }
 
-  
-
   .answer-number {
     display: none;
   }
+
   #status {
     height: 40px;
     margin-bottom: 0;
   }
+
   #score-message {
     line-height: 15px;
     height: 40px;
   }
+
   #score {
     margin-top: 8px;
   }
