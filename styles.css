@@ -46,6 +46,7 @@ canvas:active {
 
 body {
   color: white;
+  background-color: black;
   margin-bottom: 70px; /* make room for iOS address bar, apple nepotism srry */
   font-family: 'Nunito', sans-serif;
   background-image: url('/space.png');
