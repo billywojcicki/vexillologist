@@ -45,7 +45,7 @@ canvas:active {
 body {
   color: white;
   font-size: 16px;
-  margin: 32px 0;
+  margin-bottom: 0;
   font-family: 'Nunito', sans-serif;
   background-image: url('space.png');
   background-size: auto;
@@ -80,9 +80,7 @@ img,
 }
 
 h1 {
-  max-height: 72px;
-  min-height: 48px;
-  width: 100%;
+  font-size: 48px;
   font-family: Feather;
   color: white;
   text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
@@ -94,7 +92,7 @@ h2 {
   color: white;
   text-shadow: 1px 2px 1.5px rgba(0, 0, 0, 0.3);
   margin: 12px 0 0 0;
-  font-size: 1.5em;
+  font-size: 20px;
 }
 
 #answers-container {
@@ -149,7 +147,7 @@ input::placeholder {
   min-width: 144px;
   max-height: 56px;
   height: auto;
-  min-height: 36px;
+  /* min-height: 36px; */
   margin: 8px 0;
 }
 
@@ -185,7 +183,7 @@ input::placeholder {
 #score-container {
   text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2);
   font-weight: bold;
-  font-size: 1.25em;
+  font-size: 18px;
 }
 
 #score {
@@ -357,17 +355,61 @@ input {
 @media only screen and (max-width: 768px) {
   /* styles here will be applied to devices with screen widths of 768 pixels or less */
 
+h1 {
+  font-size: 28px;
+}
+
+h2 {
+  font-size: 14px;
+}
+
   img {
-    width: 128px;
-    height: 96px;
+    margin: 12px 0;
   }
+
+  #answers-container {
+    column-gap: 8px;
+  }
+
+  .answer-text {
+    font-size: 11px;
+    margin: 0 4px;
+  }
+
+  #score-container {
+    font-size: 14px;
+  }
+
+  .settings-button {
+    width: 70px;
+    height: 24px;
+  }
+
+  .answer-button {
+    margin: 6px 0;
+    width: 136px;
+    height: 28px;
+  }
+
+  img {
+    width: 96px;
+    height: 72px;
+  }
+
+  
 
   .answer-number {
     display: none;
   }
-
-  .answer-text {
-    margin-left: 8px;
+  #status {
+    height: 40px;
+    margin-bottom: 0;
   }
-
+  #score-message {
+    line-height: 15px;
+    height: 40px;
+  }
+  #score {
+    margin-top: 8px;
+  }
 }
