@@ -149,7 +149,7 @@ input::placeholder {
   min-width: 144px;
   max-height: 56px;
   height: auto;
-  height: 44px;
+  min-height: 36px;
   margin: 8px 0;
 }
 
