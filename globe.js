@@ -4,7 +4,7 @@ globe.loadPlugin(autorotate(1));
 // The `earth` plugin draws the oceans and the land; it's actually
 // a combination of several separate built-in plugins.
 globe.loadPlugin(planetaryjs.plugins.earth({
-  topojson: { file: 'world-110m.json' },
+  topojson: { file: './world-110m.json' },
   oceans: { fill: '#94b6e4' },
   land: { fill: '#aae57e' },
   borders: { stroke: '#aae57e' }
