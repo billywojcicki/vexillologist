@@ -57,7 +57,7 @@ body {
   background-size: auto;
   background-repeat: repeat;
   overflow: hidden;
-  height: 100vh; /* idk here */
+  height: 90vh; /* idk here */
   display: flex;
   flex-direction: column;
   align-items: center;

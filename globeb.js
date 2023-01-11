@@ -3,8 +3,8 @@ var globe = planetaryjs.planet();
 globe.loadPlugin(autorotate(1));
 // The `earth` plugin draws the oceans and the land; it's actually
 // a combination of several separate built-in plugins.
-globe.loadPlugin(autocenter({extraHeight: -120})); // WWWWWWWWWWWWWWWWWWWWWWWWWWWW
-globe.loadPlugin(autoscale({extraHeight: -120})); // WWWWWWWWWWWWWWWWWWWWWWWWWWWW
+globe.loadPlugin(autocenter({ extraHeight: -120 })); // WWWWWWWWWWWWWWWWWWWWWWWWWWWW
+globe.loadPlugin(autoscale({ extraHeight: -120 })); // WWWWWWWWWWWWWWWWWWWWWWWWWWWW
 globe.loadPlugin(planetaryjs.plugins.earth({
   topojson: { file: './world-110m.json' },
   oceans: { fill: '#94b6e4' },
@@ -49,48 +49,60 @@ globe.draw(canvas);
 
 
 
-  // Plugin to resize the canvas to fill the window and to
-  // automatically center the planet when the window size changes
-  function autocenter(options) {
-    options = options || {};
-    var needsCentering = false;
-    var globe = null;
+// Plugin to resize the canvas to fill the window and to
+// automatically center the planet when the window size changes
+function autocenter(options) {
+  options = options || {};
+  var needsCentering = false;
+  var globe = null;
 
-    var resize = function() {
-      var width  = window.innerWidth;
-      var height = window.innerHeight;
-      globe.canvas.width = width;
-      globe.canvas.height = height;
-      globe.projection.translate([width / 2, height / 2]);
-    };
+  if (window.devicePixelRatio == 2) {
+    globe.canvas.width = width * 2;
+    globe.canvas.height = height * 2;
+    context = canvas.getContext('2d');
+    context.scale(2, 2);
+  } else if (window.devicePixelRatio >= 3) {
+    globe.canvas.width = width * 3;
+    globe.canvas.height = height * 3;
+    context = canvas.getContext('2d');
+    context.scale(3, 3);
+  }
 
-    return function(planet) {
-      globe = planet;
-      planet.onInit(function() {
+  var resize = function () {
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+    globe.canvas.width = width;
+    globe.canvas.height = height;
+    globe.projection.translate([width / 2, height / 2]);
+  };
+
+  return function (planet) {
+    globe = planet;
+    planet.onInit(function () {
+      needsCentering = true;
+      d3.select(window).on('resize', function () {
         needsCentering = true;
-        d3.select(window).on('resize', function() {
-          needsCentering = true;
-        });
       });
+    });
 
-      planet.onDraw(function() {
-        if (needsCentering) { resize(); needsCentering = false; }
-      });
-    };
+    planet.onDraw(function () {
+      if (needsCentering) { resize(); needsCentering = false; }
+    });
   };
+};
 
-  // Plugin to automatically scale the planet's projection based
-  // on the window size when the planet is initialized
-  function autoscale(options) {
-    options = options || {};
-    return function(planet) {
-      planet.onInit(function() {
-        var width  = window.innerWidth;
-        var height = window.innerHeight;
-        planet.projection.scale(Math.min(width, height) / 1.25);
-      });
-    };
+// Plugin to automatically scale the planet's projection based
+// on the window size when the planet is initialized
+function autoscale(options) {
+  options = options || {};
+  return function (planet) {
+    planet.onInit(function () {
+      var width = window.innerWidth;
+      var height = window.innerHeight;
+      planet.projection.scale(Math.min(width, height) / 1.25);
+    });
   };
+};
 
 
 
