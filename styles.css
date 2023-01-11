@@ -343,12 +343,8 @@ input:checked+.slider:before {
 }
 
 img {
-  max-width: 256px;
-  max-height: 192px;
-  width: auto;
-  height: auto;
-  min-width: 128px;
-  min-height: 96px;
+  width: 256px;
+  height: 192px;
   margin: 24px 0;
 }
 
@@ -356,4 +352,14 @@ input {
   width: 348px;
   height: 56px;
   font-size: 1.25em;
+}
+
+@media only screen and (max-width: 768px) {
+  /* styles here will be applied to devices with screen widths of 768 pixels or less */
+
+  img {
+    width: 128px;
+    height: 96px;
+  }
+
 }
