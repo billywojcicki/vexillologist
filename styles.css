@@ -46,7 +46,7 @@ canvas:active {
 
 body {
   color: white;
-  margin-bottom: 70px; /* make room for iOS address bar, apple nepotism srry */
+  margin-bottom: 60px; /* make room for iOS address bar, apple nepotism srry */
   font-family: 'Nunito', sans-serif;
   background-image: url('./space.png');
   background-size: auto;
@@ -63,6 +63,7 @@ body {
 }
 
 /* z-indexing keeps the background interactive even when behind elements */
+#cap,
 #logo,
 img,
 #answers-container,
@@ -176,13 +177,15 @@ input::placeholder {
 
 #score-container {
   text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2);
-  font-weight: bold;
   font-size: 20px;
+  font-weight: bold;
 }
 
 #score {
   line-height: 34px;
   margin: 16px 0;
+  
+  font-size: 12px;
 }
 
 .control-container {
@@ -400,6 +403,7 @@ input {
   #status {
     height: 40px;
     margin-bottom: 0;
+    font-size: 10px;
     margin-top: 8px;
   }
 
