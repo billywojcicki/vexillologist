@@ -63,7 +63,6 @@ body {
 }
 
 /* z-indexing keeps the background interactive even when behind elements */
-#cap,
 #logo,
 img,
 #answers-container,
@@ -347,7 +346,7 @@ input {
 }
 
 
-
+/* Mobile */
 @media (max-width: 767px) {
   /* styles here will be applied to devices with screen widths of 768 pixels or less */
 
@@ -377,7 +376,7 @@ input {
 
   .answer-text {
     font-size: 14px;
-    margin: 0 4px;
+    margin: 0 11px;
   }
 
   #score-container {
@@ -385,7 +384,7 @@ input {
   }
 
   .settings-button {
-    width: 70px;
+    width: 90px;
     height: 24px;
   }
 
@@ -393,7 +392,7 @@ input {
     margin: 6px 0;
     min-width: 159.5px;
     width: 100%;
-    height: 36px;
+    height: 41px; /* maximum possible size minimum width can fit */
   }
 
   img {
@@ -423,4 +422,8 @@ input {
       font-weight: normal;
       width: 100%;
   }
+}
+
+/* < 375px width (2022 iPhone SE viewport) not supported */
+@media (max-width: 374px) {
 }
