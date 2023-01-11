@@ -103,7 +103,7 @@ h2 {
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(5, auto);
   column-gap: 16px;
-  margin: 0 8px;
+  margin: 0 16px;
 }
 
 /* !!! */
@@ -150,7 +150,7 @@ input::placeholder {
   max-height: 56px;
   height: auto;
   height: 44px;
-  margin: 8px 8px;
+  margin: 8px 0;
 }
 
 .answer-button:hover,
