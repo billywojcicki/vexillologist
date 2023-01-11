@@ -1,0 +1,345 @@
+@font-face {
+  font-family: 'Feather';
+  src: url('./fonts/Feather/feather_bold_by_typicalbro44_dee263c.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('./fonts/Nunito/Nunito-VariableFont_wght.ttf') format('truetype');
+}
+
+html {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Old versions of Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+}
+
+/* LOOKING PRETTY PEARLED! We should scale down settings menu size too. */
+
+canvas {
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1920px;
+  height: 1920px;
+}
+
+canvas:hover {
+  cursor: grab;
+}
+
+canvas:active {
+  cursor: grabbing;
+}
+
+body {
+  color: white;
+  margin: 0;
+  font-family: 'Nunito', sans-serif;
+  background-image: url('/space.png');
+  background-size: auto;
+  background-repeat: repeat;
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  text-align: center;
+  /* white-space: normal; */
+  z-index: 1;
+}
+
+/* z-indexing keeps the background interactive even when behind elements */
+#logo,
+img,
+#answers-container,
+#free-response,
+#score-container,
+#settings,
+#game-over-prompt,
+#confetti-container {
+  z-index: 2;
+}
+
+/* packing h1 and h2 into #logo because we don't want "justify-content: space-evenly;" to separate them */
+#logo {
+  color: white;
+}
+
+h1 {
+  font-family: Feather;
+  color: white;
+  text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
+  margin: 0 0 12px 0;
+  font-size: 72px;
+}
+
+h2 {
+  color: white;
+  text-shadow: 1px 2px 1.5px rgba(0, 0, 0, 0.3);
+  margin: 12px 0 0 0;
+  font-size: 24px;
+}
+
+#answers-container {
+  color: black;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(5, auto);
+  column-gap: 16px;
+}
+
+/* !!! */
+/* Make sure mobile has "Go" on the keyboard to function as an enter button */
+#free-response {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+input {
+  border-radius: 16px;
+  background-color: #ffffff;
+  border: 2px solid #e5e5e5;
+  border-bottom: 6px solid #e5e5e5;
+  transition: all 0.1s;
+  display: inline-flex;
+  align-items: center;
+  resize: none;
+  color: black;
+  font-family: 'Nunito', sans-serif;
+  text-align: center;
+  overflow: hidden;
+  outline: none;
+}
+
+input::placeholder {
+  color: #e5e5e5;
+}
+
+.answer-button {
+  font-size: 16px;
+  border-radius: 16px;
+  background-color: #ffffff;
+  border: 2px solid #e5e5e5;
+  border-bottom: 6px solid #e5e5e5;
+  transition: all 0.1s;
+  display: inline-flex;
+  align-items: center;
+  width: 232px;
+  height: 56px;
+  margin: 8px 0;
+}
+
+.answer-button:hover,
+.settings-button:hover {
+  background-color: #ddf4ff;
+  border-color: #1cb0f6;
+  cursor: pointer;
+}
+
+.answer-button:active,
+.settings-button:active {
+  border-bottom: 2px solid #1cb0f6;
+}
+
+.answer-number {
+  border: 2px solid #e5e5e5;
+  border-radius: 8px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  margin: 0 8px;
+  align-items: center;
+}
+
+.answer-text {
+  margin-right: 16px;
+  width: 100%;
+  text-align: center;
+}
+
+#score-container {
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2);
+  font-weight: bold;
+  font-size: 20px;
+}
+
+#score {
+  line-height: 34px;
+  margin: 16px 0;
+}
+
+.control-container {
+  overflow: hidden;
+  display: flex;
+}
+
+.settings-button {
+  color: black;
+  width: 100px;
+  height: 34px;
+  border-radius: 16px;
+  background-color: #ffffff;
+  border: 2px solid #e5e5e5;
+  border-bottom: 6px solid #e5e5e5;
+  transition: all 0.1s;
+  display: inline-flex;
+  align-items: center;
+}
+
+.settings-text {
+  font-size: 16px;
+  font-weight: 100;
+  width: 100%;
+}
+
+#settings,
+#game-over-prompt {
+  color: white;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 4;
+}
+
+#game-over-prompt p span {
+  color: #1cb0f6;
+}
+
+.inline {
+  display: inline-flex;
+}
+
+.hide {
+  display: none !important;
+}
+
+#page-mask {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: 3;
+}
+
+.toggle-container,
+#settings-buttons-container {
+  width: 248px;
+}
+
+#github-button,
+#share-button {
+  margin-right: 16px;
+}
+
+.toggle-label {
+  float: left;
+  line-height: 34px;
+  margin-right: 8px;
+}
+
+label {
+  float: right;
+}
+
+/* Toggle switch CSS code from w3schools */
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  margin: 16px 0;
+  /* match language flag margin */
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+#language-container {
+  float: right;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked+.slider {
+  background-color: #1cb0f6;
+}
+
+input:focus+.slider {
+  box-shadow: 0 0 1px #1cb0f6;
+}
+
+input:checked+.slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 16px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+img {
+  margin: 24px 0;
+}
+
+input {
+  width: 348px;
+  height: 56px;
+  font-size: 20px;
+}
