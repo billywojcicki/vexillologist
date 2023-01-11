@@ -362,4 +362,8 @@ input {
     height: 96px;
   }
 
+  .answer-number {
+    display: none;
+  }
+
 }
