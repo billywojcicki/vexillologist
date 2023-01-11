@@ -45,17 +45,17 @@ canvas:active {
 body {
   color: white;
   font-size: 16px;
-  margin: 0;
+  margin: 32px 0;
   font-family: 'Nunito', sans-serif;
   background-image: url('/space.png');
   background-size: auto;
+  height: 100%;
   background-repeat: repeat;
   overflow: hidden;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
   text-align: center;
   /* white-space: normal; */
   z-index: 1;
@@ -76,14 +76,18 @@ img,
 /* packing h1 and h2 into #logo because we don't want "justify-content: space-evenly;" to separate them */
 #logo {
   color: white;
+  width: 100%;
 }
 
 h1 {
+  max-height: 72px;
+  min-height: 48px;
+  width: 100%;
   font-family: Feather;
   color: white;
   text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
   margin: 0 0 12px 0;
-  font-size: 4.5em;
+  /* font-size: 4.5em; */
 }
 
 h2 {
@@ -99,6 +103,7 @@ h2 {
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(5, auto);
   column-gap: 16px;
+  margin: 0 8px;
 }
 
 /* !!! */
@@ -140,12 +145,12 @@ input::placeholder {
   display: inline-flex;
   align-items: center;
   max-width: 232px;
-  width: auto;
+  width: 100%;
   min-width: 144px;
   max-height: 56px;
   height: auto;
   height: 44px;
-  margin: 8px 0;
+  margin: 8px 8px;
 }
 
 .answer-button:hover,
@@ -338,6 +343,12 @@ input:checked+.slider:before {
 }
 
 img {
+  max-width: 256px;
+  max-height: 192px;
+  width: auto;
+  height: auto;
+  min-width: 128px;
+  min-height: 96px;
   margin: 24px 0;
 }
 
