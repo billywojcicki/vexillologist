@@ -26,7 +26,7 @@ html {
 
 /* LOOKING PRETTY PEARLED! We should scale down settings menu size too. */
 
-canvas {
+/* canvas {
   position: absolute;
   z-index: 0;
   top: 50%;
@@ -34,6 +34,11 @@ canvas {
   transform: translate(-50%, -50%);
   width: 1920px;
   height: 1920px;
+} */
+
+canvas {
+  position: absolute;
+  z-index: 0;
 }
 
 canvas:hover {
@@ -46,13 +51,13 @@ canvas:active {
 
 body {
   color: white;
-  margin-bottom: 60px; /* make room for iOS address bar, apple nepotism srry */
+  margin: 0 0 60px 0; /* make room for iOS address bar, apple nepotism srry */
   font-family: 'Nunito', sans-serif;
   background-image: url('./space.png');
   background-size: auto;
   background-repeat: repeat;
   overflow: hidden;
-  height: 90vh;
+  height: 100vh; /* idk here */
   display: flex;
   flex-direction: column;
   align-items: center;
