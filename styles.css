@@ -1,0 +1,509 @@
+@font-face {
+  font-family: 'Feather';
+  src: url('./fonts/Feather/feather_bold_by_typicalbro44_dee263c.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('./fonts/Nunito/Nunito-VariableFont_wght.ttf') format('truetype');
+}
+
+
+
+
+html {
+  align-items: center;
+  display: flex;
+  height: 100%; /* Used if browser doesn't support -webkit-fill-available; */
+  height: -webkit-fill-available;
+  justify-content: center;
+
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+
+body {
+  /* Some seemingly redudant code from parent fixes globe sizing */
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  background-image: url('./space.png');
+  background-repeat: repeat;
+  background-size: auto;
+  box-sizing: border-box;
+  color: white;
+  flex-direction: column;
+  font-family: 'Nunito', sans-serif;
+  margin: 0;
+  overflow: hidden;
+  text-align: center;
+  z-index: 1;
+}
+
+canvas {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+}
+
+canvas:hover {
+  cursor: grab;
+}
+
+canvas:active {
+  cursor: grabbing;
+}
+
+/* Z-indexing here organizes layers to enable interaction with background globe animation */
+h1,
+h2,
+img,
+#answers-container,
+#free-response-container,
+#info-container,
+#settings,
+#game-over-prompt,
+#sorry-prompt {
+  z-index: 2;
+}
+
+#page-mask,
+#page-mask-classless {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: 3;
+}
+
+#page-mask-classless {
+  display: none;
+}
+
+h1, h2 {
+  color: white;
+}
+
+h1 {
+  font-family: Feather;
+  font-size: 72px;
+  margin: 0 0 12px 0;
+  text-shadow: 3px 6px 0 rgba(0, 0, 0, 0.3);
+}
+
+h2 {
+  font-size: 24px;
+  margin: 0;
+  text-shadow: 2px 3px 0 rgba(0, 0, 0, 0.3);
+}
+
+img {
+  margin: 32px 0;
+}
+
+#answers-container {
+  color: black;
+  column-gap: 16px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(5, auto);
+}
+
+.answer-button {
+  align-items: center;
+  background-color: #ffffff;
+  border: 2px solid #e5e5e5;
+  border-bottom: 6px solid #e5e5e5;
+  border-radius: 16px;
+  box-sizing: border-box;
+  display: inline-flex;
+  font-size: 16px;
+  height: 64px;
+  margin: 8px 0;
+  transition: all 0.1s;
+  width: 236px;
+}
+
+@media (hover: hover) {
+  .answer-button:hover,
+  .settings-button:hover {
+    background-color: #ddf4ff;
+    border-color: #1cb0f6;
+    cursor: pointer;
+  }
+}
+
+.answer-button:active,
+.settings-button:active {
+  /* Some seemingly redundant code from hover pseudoclass fixes sticky mobile tapping */
+  background-color: #ddf4ff;
+  border-color: #1cb0f6;
+  cursor: pointer;
+  border-bottom: 2px solid #1cb0f6;
+}
+
+.active-tap {
+  background-color: #ddf4ff;
+  border-color: #1cb0f6;
+  border-bottom: 2px solid #1cb0f6;
+}
+
+.answer-number {
+  align-items: center;
+  border: 2px solid #e5e5e5;
+  border-radius: 8px;
+  display: flex;
+  height: 30px;
+  justify-content: center;
+  margin: 0 8px;
+  width: 30px;
+}
+
+.answer-text {
+  margin-right: 16px;
+  text-align: center;
+  width: 70%; /* Push long names like DR Congo to new line */
+}
+
+#free-response-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin: 32px 0;
+}
+
+input {
+  align-items: center;
+  background-color: #ffffff;
+  border: 2px solid #e5e5e5;
+  border-bottom: 6px solid #e5e5e5;
+  border-radius: 16px;
+  color: black;
+  display: inline-flex;
+  font-family: 'Nunito', sans-serif;
+  font-size: 20px;
+  height: 56px;
+  overflow: hidden;
+  outline: none;
+  resize: none;
+  text-align: center;
+  transition: all 0.1s;
+  width: 348px;
+}
+
+input::placeholder {
+  color: #e5e5e5;
+}
+
+#info-container {
+  font-size: 20px;
+  font-weight: bold;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
+}
+
+#message-container {
+  margin-top: 16px;
+  margin-bottom: 0;
+}
+
+#stats {
+  font-size: 20px;
+  line-height: 29px; /* Vertically align text with emoji offset */
+  margin: 16px 0;
+}
+
+.settings-button {
+  color: black;
+  width: 100px;
+  height: 36px;
+  border-radius: 16px;
+  background-color: #ffffff;
+  border: 2px solid #e5e5e5;
+  border-bottom: 6px solid #e5e5e5;
+  transition: all 0.1s;
+  display: inline-flex;
+  align-items: center;
+}
+
+.settings-text {
+  font-size: 16px;
+  font-weight: normal;
+  width: 100%;
+  text-shadow: none;
+}
+
+#settings,
+#game-over-prompt,
+#sorry-prompt {
+  align-items: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+}
+
+#game-over-prompt,
+#sorry-prompt {
+  width: 80%;
+}
+
+.prompt-text {
+  font-size: 20px;
+  max-width: 640px;
+}
+
+#game-over-prompt p span {
+  color: #1cb0f6;
+}
+
+#github-button,
+#share-button {
+  margin-right: 16px; /* Column gap in overlays with buttons */
+}
+
+#sorry-prompt {
+  display: none;
+}
+
+.toggle-container,
+#settings-buttons-container {
+  width: 248px;
+}
+
+.toggle-label {
+  float: left;
+  line-height: 34px;
+  margin-right: 8px;
+}
+
+label {
+  float: right;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  margin: 16px 0;
+}
+
+.switch input {
+  opacity: 0; /* Hide default HTML checkbox */
+  width: 0;
+  height: 0;
+}
+
+#language-container {
+  float: right;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  background-color: white;
+  content: "";
+  height: 26px;
+  position: absolute;
+  left: 4px;
+  bottom: 4px;
+  transition: .4s;
+  -webkit-transition: .4s;
+  width: 26px;
+}
+
+input:checked+.slider {
+  background-color: #1cb0f6;
+}
+
+input:focus+.slider {
+  box-shadow: 0 0 1px #1cb0f6;
+}
+
+input:checked+.slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 16px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+#dummy-container {
+  display: none;
+}
+
+#dummy-slider {
+  background-color: rgba(153, 153, 153);
+}
+
+#dummy-slider:before {
+  background-color: rgba(230, 230, 230);
+}
+
+.inline {
+  display: inline-flex;
+}
+
+.hide {
+  display: none !important;
+}
+
+.invisible {
+  opacity: 0;
+}
+
+
+
+
+/* Mobile */
+@media (max-width: 767px) {
+
+  body {
+    width: 375px;
+  }
+
+  h1 {
+    font-size: 36px;
+    margin: 8px 0;
+    text-shadow: 1px 2px 0 rgba(0, 0, 0, 0.3);
+  }
+
+  h2 {
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 8px;
+    text-shadow: none;
+  }
+
+  img {
+    width: 128px;
+    height: 96px;
+    margin: 8px 0;
+  }
+
+  #answers-container {
+    column-gap: 16px;
+    margin: 8px 16px;
+  }
+
+  .answer-button {
+    margin: 6px 0;
+    min-width: 167.5px;
+    width: 100%;
+    height: 49px; /* Max size minimum width can support */
+  }
+
+  .answer-number {
+    display: none;
+  }
+
+  .answer-text {
+    font-size: 14px;
+    margin: 0 15px;
+    width: 100%;
+  }
+
+  input {
+    width: 232px;
+  }
+
+  #info-container {
+    font-size: 12px;
+    text-shadow: none;
+  }
+
+  #message-container {
+    margin-top: 8px;
+  }
+
+  #stats {
+    margin-top: 8px;
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .settings-button {
+    width: 90px;
+    height: 30px;
+  }
+
+  .settings-text {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  #type-answers-container {
+    display: none;
+  }
+
+  #dummy-container {
+    display: block;
+  }
+
+  .prompt-text {
+    font-size: 16px;
+  }
+}
+
+
+
+
+/* Viewport widths too small to fit all website elements (cut-off point based on iPhone SE 2022) */
+@media (max-width: 374px) {
+
+  #confetti-canvas {
+    display: none;
+  }
+
+  #page-mask {
+    display: none;
+  }
+
+  #page-mask-classless {
+    display: block;
+  }
+
+  #settings {
+    display: none;
+  }
+
+  #game-over-prompt {
+    display: none;
+  }
+
+  .prompt-text {
+    font-size: 16px;
+  }
+
+  #sorry-prompt {
+    display: block;
+  }
+}

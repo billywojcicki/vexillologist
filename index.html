@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W839BVMZ6K"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-W839BVMZ6K');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link href="styles.css" rel="stylesheet">
+  <script defer src="script.js"></script>
+  <script src="arrays.js"></script>
+  <script type='text/javascript' src='https://d3js.org/d3.v3.min.js'></script>
+  <script type='text/javascript' src='https://d3js.org/topojson.v1.min.js'></script>
+  <script type='text/javascript' src='planetaryjs.min.js'></script>
+  <link rel="apple-touch-icon" sizes="180x180" href="./flags/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./flags/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./flags/favicon/favicon-16x16.png">
+  <meta property="og:image" content="./imessage-preview.png">
+  <title>vexillologist - Learn the world's flags!</title>
+  <meta name="description" content="An educational world flags web game.">
+</head>
+
+<body>
+
+  <canvas id='rotatingGlobe'></canvas>
+  <script type='text/javascript' src='globe.js'></script>
+
+  <script src="confetti.js"></script>
+
+  <div id="page-mask" class="hide"></div>
+  <div id="page-mask-classless"></div>
+
+  <h1>vexillologist</h1>
+  <h2>Learn the world's flags!</h2>
+
+  <img id="question-image" src="">
+
+
+  <div id="answers-container">
+
+    <div id="answer-button-1" class="answer-button" tabindex="1">
+      <p class="answer-number">1</p>
+      <p id="answer-text-1" class="answer-text">Answer 1 Placeholder</p>
+    </div>
+
+    <div id="answer-button-6" class="answer-button" tabindex="6">
+      <p class="answer-number">6</p>
+      <p id="answer-text-6" class="answer-text">Answer 6 Placeholder</p>
+    </div>
+
+    <div id="answer-button-2" class="answer-button" tabindex="2">
+      <p class="answer-number">2</p>
+      <p id="answer-text-2" class="answer-text">Answer 2 Placeholder</p>
+    </div>
+
+    <div id="answer-button-7" class="answer-button" tabindex="7">
+      <p class="answer-number">7</p>
+      <p id="answer-text-7" class="answer-text">Answer 7 Placeholder</p>
+    </div>
+
+    <div id="answer-button-3" class="answer-button" tabindex="3">
+      <p class="answer-number">3</p>
+      <p id="answer-text-3" class="answer-text">Answer 3 Placeholder</p>
+    </div>
+
+    <div id="answer-button-8" class="answer-button" tabindex="8">
+      <p class="answer-number">8</p>
+      <p id="answer-text-8" class="answer-text">Answer 8 Placeholder</p>
+    </div>
+
+    <div id="answer-button-4" class="answer-button" tabindex="4">
+      <p class="answer-number">4</p>
+      <p id="answer-text-4" class="answer-text">Answer 4 Placeholder</p>
+    </div>
+
+    <div id="answer-button-9" class="answer-button" tabindex="9">
+      <p class="answer-number">9</p>
+      <p id="answer-text-9" class="answer-text">Answer 9 Placeholder</p>
+    </div>
+
+    <div id="answer-button-5" class="answer-button" tabindex="5">
+      <p class="answer-number">5</p>
+      <p id="answer-text-5" class="answer-text">Answer 5 Placeholder</p>
+    </div>
+
+    <div id="answer-button-10" class="answer-button" tabindex="10">
+      <p class="answer-number">0</p>
+      <p id="answer-text-10" class="answer-text">Answer 10 Placeholder</p>
+    </div>
+  </div>
+
+
+  <div id="free-response-container" class="hide">
+    <input id="free-response-input" placeholder="Somewhere..." maxlength="32" autocomplete="off" autofocus></input>
+  </div>
+
+
+  <div id="info-container">
+
+    <p id="message-container">
+      <span id="message">&#9989; placeholder text</span>
+    </p>
+
+    <p id="stats" class="inline">
+      &#128681;
+      <span class="invisible">_</span>
+      <span id="flags-remaining"></span>
+      <span class="invisible">__</span>
+      &#9201;
+      <span class="invisible">_</span>
+      <span id="stopwatch"> 00:00</span>
+      <span class="invisible">__</span>
+      &#127919;
+      <span class="invisible">_</span>
+      <span id="accuracy"></span>%</span>
+      <span class="invisible">__</span>
+    </p>
+
+    <div id="open-settings-button" class="settings-button">
+      <p class="settings-text">&#9881;&#65039; Settings</p>
+    </div>
+  </div>
+
+
+
+  <div id="settings" class="hide">
+    <h1 style="margin-bottom: 32px">Settings</h1>
+
+    <div class="toggle-container" id="type-answers-container">
+      <p class="toggle-label">Type Answers</p>
+      <label class="switch">
+        <input id="type-answers-button" type="checkbox">
+        <span class="slider round"></span>
+      </label>
+    </div>
+
+    <div class="toggle-container" id="dummy-container">
+      <p class="toggle-label">Type Answers &#128245;</p>
+      <label class="switch">
+        <span id="dummy-slider" class="slider round" style="cursor: default"></span>
+      </label>
+    </div>
+
+    <div class="toggle-container">
+      <p class="toggle-label">Toggle Capitals</p>
+      <label class="switch">
+        <input id="toggle-capitals-button" type="checkbox">
+        <span class="slider round"></span>
+      </label>
+    </div>
+
+    <div class="toggle-container">
+      <p class="toggle-label">Toggle US States</p>
+      <label class="switch">
+        <input id="toggle-states-button" type="checkbox">
+        <span class="slider round"></span>
+      </label>
+    </div>
+
+    <div class="toggle-container">
+      <div id="settings-buttons-container" style="margin-top: 32px">
+
+        <a href="https://github.com/billywojcicki/vexillologist" target="_blank" style="text-decoration: none;">
+          <div id="github-button" class="settings-button">
+            <p class="settings-text">&#128049;<span class="invisible">_</span>GitHub</p>
+          </div>
+        </a>
+
+        <div id="close-settings-button" class="settings-button">
+          <p class="settings-text">&#128281;<span class="invisible">_</span>Close</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="game-over-prompt" class="hide">
+
+    <h1>Game Over</h1>
+
+    <p class="prompt-text">You successfully identified
+      <span id="scope"></span>
+      <span id="mode"></span> in
+      <span id="format"></span> format. You finished in
+      <span id="time"></span> with
+      <span id="final-accuracy"></span><span>% accuracy</span>.
+      <span id="compliment" style="color: white;"></span>!
+    </p>
+
+    <div id="settings-buttons-container" style="margin-top: 32px">
+
+      <div id="share-button" class="settings-button">
+        <p class="settings-text">&#x1F4CB;<span class="invisible">_</span>Share</p>
+      </div>
+
+      <div id="restart-button" class="settings-button">
+        <p class="settings-text">&#128260;<span class="invisible">_</span>Restart</p>
+      </div>
+
+    </div>
+    <p id="copied" style="opacity: 0;">Stats copied to clipboard!</p>
+  </div>
+
+
+  <div id="sorry-prompt">
+    <h1>Sorry!</h1>
+    <p class="prompt-text">Your current dimensions are not supported. Please try visiting with a different device or enlarging your browser window.</p>
+  </div>
+
+</body>
+
+</html>
