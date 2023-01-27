@@ -133,28 +133,51 @@ bank.generateQuestions(toggleUS, toggleCapitals);
 
 
 
-// Initialize arrays to store the answer text and button elements
+// Initialize arrays to store the answer elements
 const answerButtonElements = [];
 const answerTextElements = [];
+const answerNumberElements = [];
 
 // Use a loop to select the elements with IDs that contain a suffix from 1 to 10
 for (let i = 1; i <= 10; i++) {
   // Push the selected elements to the appropriate array
   answerButtonElements.push(document.getElementById(`answer-button-${i}`));
   answerTextElements.push(document.getElementById(`answer-text-${i}`));
+  answerNumberElements.push(document.getElementById(`answer-number-${i}`));
 }
 
 
 
 
 // Update flag image and answer text elements
+let correctButton;
 const questionImage = document.getElementById('question-image');
+
 const showQuestion = () => {
   const question = bank.questions[currentQuestionIndex];
   questionImage.src = question.image;
+
   for (let i = 0; i < answerTextElements.length; i++) {
     answerTextElements[i].textContent = question.answers[i];
+    if (answerTextElements[i].textContent === question.correctAnswer) {
+      correctButton = i; // Store correct answer button location for later reference
+    }
   }
+
+  // Remove color-coded button feedback
+  for (let i = 0; i < answerButtonElements.length; i++) {
+    answerButtonElements[i].classList.remove('answer-button-correct');
+    answerButtonElements[i].classList.remove('answer-button-incorrect');
+    answerNumberElements[i].classList.remove('answer-number-correct');
+    answerNumberElements[i].classList.remove('answer-number-incorrect');
+  }
+
+  // Disable "click anywhere to continue"
+  clickMask.classList.add('hide');
+
+  resetMessage();
+  freeResponseInput.value = '';
+  freeResponseInput.focus();
 };
 
 
@@ -271,19 +294,40 @@ function getCoordinates(answer, toggleCapitals, toggleUS) {
 
 
 
+// "Click anywhere to continue" logic
+const clickMask = document.getElementById('click-mask');
+clickMask.addEventListener('click', function (event) {
+  showQuestion();
+});
+clickMask.addEventListener('keydown', function (event) {
+  if (event.key === 'Enter') {
+    showQuestion();
+  }
+});
+
+
+
+
 // Handle answer selection and game over
-const checkAnswer = selectedAnswer => {
+const checkAnswer = (selectedAnswer, selectedButton) => {
+
   const question = bank.questions[currentQuestionIndex];
   // If answer is correct (allow typos with levenshtein distance <= 2)
   if (levenshtein(selectedAnswer.toUpperCase(), question.correctAnswer.toUpperCase()) <= 2) {
 
-    const width = window.innerWidth;
-    // Display smaller message on mobile
-    if (width < 767) {
-      messageContent = `&#9989;<span class="invisible">_</span>${question.correctAnswer}`;
-    } else {
-      messageContent = `&#9989;<span class="invisible">_</span>You answered ${question.correctAnswer} correctly!`;
+    // Make correct answer button green
+    if (/* Multiple choice condition */ !answersContainer.classList.contains('hide')) {
+      answerButtonElements[correctButton].classList.add('answer-button-correct');
+      answerNumberElements[correctButton].classList.add('answer-number-correct');
     }
+
+    // Set message content
+    if (/* Multiple choice condition */ !answersContainer.classList.contains('hide')) {
+      messageContent = `&#9989;<span class="invisible">_</span>Correct! Click anywhere to continue...`;
+    } else /* Free response condition */ {
+      messageContent = `&#9989;<span class="invisible">_</span>Correct! The answer is ${question.correctAnswer}.`;
+    }
+
 
     getCoordinates(question.correctAnswer, toggleCapitals, toggleUS);
     // Display a green ping on the globe at the correct answer's coordinates
@@ -297,14 +341,22 @@ const checkAnswer = selectedAnswer => {
     questionCount = questionCount - 1;
     flagsRemainingSpan.innerHTML = questionCount;
 
-  } else {
 
-    const width = window.innerWidth;
-    // Display smaller message on mobile
-    if (width < 767) {
-      messageContent = `&#10060;<span class="invisible">_</span>${question.correctAnswer}`;
-    } else {
-      messageContent = `&#10060;<span class="invisible">_</span>You answered ${question.correctAnswer} incorrectly!`;
+  } else { // If answer is incorrect
+
+    // Make correct and incorrect answer buttons green and red
+    if (/* Multiple choice condition */ !answersContainer.classList.contains('hide')) {
+      answerButtonElements[correctButton].classList.add('answer-button-correct');
+      answerNumberElements[correctButton].classList.add('answer-number-correct');
+      answerButtonElements[selectedButton].classList.add('answer-button-incorrect');
+      answerNumberElements[selectedButton].classList.add('answer-number-incorrect');
+    }
+
+    // Set message content
+    if (/* Multiple choice condition */ !answersContainer.classList.contains('hide')) {
+      messageContent = `&#10060;<span class="invisible">_</span>Incorrect! Click anywhere to continue...`;
+    } else /* Free response condition */ {
+      messageContent = `&#10060;<span class="invisible">_</span>Incorrect! The answer is ${question.correctAnswer}.`;
     }
 
     getCoordinates(question.correctAnswer, toggleCapitals, toggleUS);
@@ -355,7 +407,9 @@ const checkAnswer = selectedAnswer => {
     bank.questions.sort(() => Math.random() - 0.5);
 
   } else {
-    showQuestion();
+
+    // Enable "click anywhere to continue"
+    clickMask.classList.remove('hide');
   }
 };
 
@@ -399,12 +453,13 @@ function updateSummary() {
 
 // Handle answer button clicks
 for (let i = 0; i < answerButtonElements.length; i++) {
-  answerButtonElements[i].addEventListener('click', () => checkAnswer(answerTextElements[i].textContent));
+  answerButtonElements[i].addEventListener('click', () => checkAnswer(answerTextElements[i].textContent, i));
 }
 
 // Handle keyboard shortcuts
 document.addEventListener('keydown', function (event) {
-  if (freeResponseField.classList.contains('hide') /* Multiple choice condition */) {
+  if (/* Multiple choice condition */ freeResponseField.classList.contains('hide')
+    && /* Ignore during answer review */ clickMask.classList.contains('hide')) {
     const keyAnswerMap = {
       '0': answerTextElements[9].textContent,
       '1': answerTextElements[0].textContent,
@@ -417,7 +472,20 @@ document.addEventListener('keydown', function (event) {
       '8': answerTextElements[7].textContent,
       '9': answerTextElements[8].textContent,
     };
-    if (keyAnswerMap[event.key]) checkAnswer(keyAnswerMap[event.key]);
+
+    if (keyAnswerMap[event.key]) {
+      // Translate 0 key press
+      if (event.key === '0') {
+        checkAnswer(keyAnswerMap[event.key], 9);
+        // Translate keys 1-9
+      } else {
+        checkAnswer(keyAnswerMap[event.key], event.key - 1);
+      }
+    }
+
+    // "Press key to continue" logic
+  } else if (!clickMask.classList.contains('hide')) {
+    showQuestion();
   }
 });
 
@@ -562,16 +630,22 @@ freeResponseInput.addEventListener('input', () => {
 });
 
 // Listen for "Enter" key press
-freeResponseField.addEventListener('keydown', event => {
-  if (answersContainer.classList.contains('hide') /* Fill-in-the-blank condition */ && event.key === 'Enter') {
+document.addEventListener('keydown', function (event) {
+
+  if (/* Free response condition */ !freeResponseField.classList.contains('hide') 
+    && /* Ignore during answer review */ clickMask.classList.contains('hide')) {
+
     const userAnswer = freeResponseInput.value.toUpperCase();
-    if (acceptableAnswers[userAnswer]) {
-      checkAnswer(acceptableAnswers[userAnswer]);
-    } else {
-      checkAnswer(freeResponseAnswer.inputValue);
+    // I don't understand how this fixes free response click mask... but it does ¯\_(ツ)_/¯
+    if (event.key === 'Enter' && freeResponseInput.value !== '') {
+
+      if (acceptableAnswers[userAnswer]) {
+        checkAnswer(acceptableAnswers[userAnswer]);
+      } else {
+        checkAnswer(freeResponseInput.value); // userAnswer makes message text toUpperCase()
+      }
+      freeResponseInput.blur();
     }
-    freeResponseInput.value = '';
-    freeResponseInput.focus();
   }
 });
 
@@ -646,7 +720,7 @@ function updateStopwatch() {
   }
 
   let timeString;
-  if(hour === 0) {
+  if (hour === 0) {
     timeString = `${minutes}:${seconds}`;
   } else {
     timeString = `${hour}:${minutes}:${seconds}`;
@@ -684,7 +758,7 @@ buttons.forEach((button) => {
   button.addEventListener('touchend', () => {
     setTimeout(() => {
       button.classList.remove('active-tap');
-    }, 200);
+    }, 100);
   });
 });
 
