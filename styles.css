@@ -74,7 +74,8 @@ img,
 }
 
 #page-mask,
-#page-mask-classless {
+#page-mask-classless,
+#click-mask {
   position: fixed;
   top: 0;
   right: 0;
@@ -86,6 +87,10 @@ img,
 
 #page-mask-classless {
   display: none;
+}
+
+#click-mask {
+  opacity: 0;
 }
 
 h1, h2 {
@@ -115,6 +120,7 @@ img {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(5, auto);
+  margin-bottom: 16px;
 }
 
 .answer-button {
@@ -165,6 +171,26 @@ img {
   justify-content: center;
   margin: 0 8px;
   width: 30px;
+}
+
+.answer-button-correct {
+  background-color: #c9e2c9;
+  border-color: #5f9b5f;
+  border-bottom: 6px solid #5f9b5f;
+}
+
+.answer-button-incorrect {
+  background-color: #ffd9d9;
+  border-color: #ff4b4b;
+  border-bottom: 6px solid #ff4b4b;
+}
+
+.answer-number-correct {
+  border: 2px solid #5f9b5f;
+}
+
+.answer-number-incorrect {
+  border: 2px solid #ff4b4b;
 }
 
 .answer-text {
@@ -279,7 +305,7 @@ input::placeholder {
 
 .toggle-container,
 #settings-buttons-container {
-  width: 248px;
+  width: 262px;
 }
 
 .toggle-label {
@@ -437,11 +463,12 @@ input:checked+.slider:before {
 
   #info-container {
     font-size: 12px;
+    margin-top: 8px;
     text-shadow: none;
   }
 
   #message-container {
-    margin-top: 8px;
+    display: none;
   }
 
   #stats {
