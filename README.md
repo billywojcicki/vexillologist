@@ -3,7 +3,7 @@ Vexillologist is an educational world flags web game and a beginner front-end de
 
 [**Click here to play!**](https://billywojcicki.github.io/vexillologist/)
 
-![screenshot](flags/screenshot-game.png)
+![screenshot](images/screenshot-game.png)
 
 ## How to Play
 
@@ -32,7 +32,7 @@ It's simple - identify the country of the flag shown. All 193 [United Nations' m
 
 ## As seen on Hacker News
 
-![image](flags/screenshot-hn.png)
+![image](images/screenshot-hn.png)
 
 Thanks to the folks on HN for all the feedback and kind words!
 
