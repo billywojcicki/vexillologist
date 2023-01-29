@@ -113,7 +113,7 @@ const bank = {
         // Add a question object to the questions array
         this.questions.push({
           // Use the key to determine the flag image URL
-          image: `./flags/${isUS ? "us-" : ""}${key}.png`,
+          image: `./images/flags/${isUS ? "us-" : ""}${key}.png`,
           // Set the correct answer to the name or capital (depending on the isCapitals flag)
           correctAnswer: name,
           // Select the answers using the appropriate function (selectCountries or selectCapitals)

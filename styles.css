@@ -32,7 +32,7 @@ body {
   display: flex;
   justify-content: center;
 
-  background-image: url('./flags/_space.png');
+  background-image: url('./images/space.png');
   background-repeat: repeat;
   background-size: auto;
   box-sizing: border-box;
