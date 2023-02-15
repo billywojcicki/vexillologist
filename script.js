@@ -224,6 +224,7 @@ function share() {
 
 
 // Set up message (displays previous question's answer)
+// This code is no longer used since click mask logic was added
 const message = document.getElementById('message');
 message.style.opacity = 0; // Make message placeholder invisible on page load
 
@@ -636,7 +637,7 @@ document.addEventListener('keydown', function (event) {
     && /* Ignore during answer review */ clickMask.classList.contains('hide')) {
 
     const userAnswer = freeResponseInput.value.toUpperCase();
-    // I don't understand how this fixes free response click mask... but it does ¯\_(ツ)_/¯
+    // I don't understand how this fixes the free response click mask... but it does ¯\_(ツ)_/¯
     if (event.key === 'Enter' && freeResponseInput.value !== '') {
 
       if (acceptableAnswers[userAnswer]) {
