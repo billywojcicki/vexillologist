@@ -1,20 +1,17 @@
-## About
-Vexillologist is an educational world flags web game and a beginner front-end development project.
-
-[**Click here to play!**](https://billywojcicki.github.io/vexillologist/)
+# Vexillologist
+[**Vexillologist**](https://billywojcicki.github.io/vexillologist/) is an educational world flags web game.
 
 ![screenshot](images/screenshot-game.png)
 
 ## How to Play
 
-It's simple - identify the country of the flag shown. All 193 [United Nations' member states'](https://www.un.org/en/about-us/member-states) flags are included. Identify every flag to complete the game. Don't worry if you don't know them all, the game is designed to teach you the flags you're unfamiliar with as you progress. Navigate to the settings menu to explore alternate game modes. Happy learning!
+Identify the country of the flag shown. All 193 [United Nations member states](https://www.un.org/en/about-us/member-states/) flags are included. Identify every flag to complete the game. Don't worry if you don't know them all, the game is designed to teach you the flags you're unfamiliar with as you progress. Navigate to the settings menu to explore alternate game modes.
 
 ## Features
 
 - Multiple choice format
   - Keyboard shortcuts
 - Free response format
-  - Non case-sensitive
   - Typos with levenshtein distance <= 2 allowed
   - Common name variations accepted, for example:
     - "Côte d'Ivoire" accepts "Ivory Coast"
@@ -30,11 +27,10 @@ It's simple - identify the country of the flag shown. All 193 [United Nations' m
 - Responsive design
   - Optimized for desktop and mobile-friendly
 
-## As seen on Hacker News
+## Motivations
 
-![image](images/screenshot-hn.png)
-
-Thanks to the folks on HN for all the feedback and kind words!
+- Learning front-end development and web design.
+- Acing the vexillology questions at Thursday night trivia.
 
 ## Credits
 
