@@ -3,7 +3,7 @@
 
 ![screenshot](images/screenshot-game.png)
 
-## How to Play
+## How To Play
 
 Identify the country of the flag shown. All 193 [United Nations member states](https://www.un.org/en/about-us/member-states/) flags are included. Identify every flag to complete the game. Don't worry if you don't know them all, the game is designed to teach you the flags you're unfamiliar with as you progress. Navigate to the settings menu to explore alternate game modes.
 
@@ -29,8 +29,8 @@ Identify the country of the flag shown. All 193 [United Nations member states](h
 
 ## Motivations
 
-- Learning front-end development and web design.
-- Acing the vexillology questions at Thursday night trivia.
+- Learning front-end development and web design
+- Acing the vexillology questions at Thursday night trivia
 
 ## Credits
 
