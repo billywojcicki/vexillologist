@@ -27,19 +27,8 @@ Identify the country of the flag shown. All 193 [United Nations member states](h
 - Responsive design
   - Optimized for desktop and mobile-friendly
 
-## Motivations
-
-- Learning front-end development and web design
-- Acing the geography questions at Thursday night trivia
-
 ## Credits
 
 - Flag images from [flagpedia.net](https://flagpedia.net/about)
 - Interactive globe made with [planetary.js](http://planetaryjs.com/)
 - Confetti animation from [mathusummut](https://github.com/mathusummut/confetti.js)
-
-## As Seen On Hacker News
-
-![image](images/screenshot-hn.png)
-
-Thanks to the folks on HN for all the feedback and kind words!
