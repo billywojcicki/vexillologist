@@ -1,5 +1,5 @@
 # Vexillologist
-[**Vexillologist**](https://billywojcicki.github.io/vexillologist/) is an educational world flags web game inspired by Duolingo.
+[**Vexillologist**](https://billywojcicki.github.io/vexillologist/) is an educational world flags web game inspired by Duolingo. This project was created to learn front-end development and practice web design. Vexillologist has received 15,000+ visits from 10,000+ unique vistors over its lifetime!
 
 ![screenshot](images/screenshot-game.png)
 
@@ -32,3 +32,9 @@ Identify the country of the flag shown. All 193 [United Nations member states](h
 - Flag images from [flagpedia.net](https://flagpedia.net/about)
 - Interactive globe made with [planetary.js](http://planetaryjs.com/)
 - Confetti animation from [mathusummut](https://github.com/mathusummut/confetti.js)
+
+## As Seen On Hacker News
+
+![image](images/screenshot-hn.png)
+
+Thanks to the folks on HN for all the feedback and kind words!
