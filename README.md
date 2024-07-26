@@ -1,5 +1,5 @@
 # Vexillologist
-[**Vexillologist**](https://billywojcicki.github.io/vexillologist/) is an educational world flags web game inspired by Duolingo. This project was created to learn front-end development and practice web design. Vexillologist has received 15,000+ visits from 10,000+ unique vistors over its lifetime!
+[**Vexillologist**](https://billywojcicki.github.io/vexillologist/) is an educational world flags web game inspired by Duolingo. This project was created to learn front-end development and practice web design. Vexillologist has received 15,000+ visits from 10,000+ unique visitors over its lifetime!
 
 ![screenshot](images/screenshot-game.png)
 
